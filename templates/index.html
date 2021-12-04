@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ToDo Application</title>
+</head>
+<body>
+
+    <h3> Welcome to My ToDo application </h3>
+    <hr/>
+    <table >
+        <tr>
+            <th>List of Tasks</th>
+            <th>Done</th>
+        </tr>
+        {% for task_undone in tasks_undone %}
+        <tr>
+            <td>{{task_undone.title}}</td>
+            <td>
+                <input  type="checkbox" name="{{task_undone.id}}" value="checked">
+            </td>
+        </tr>
+        {% endfor %}
+
+        {% for task_done in tasks_done %}
+        <tr>
+            <td><strike>{{task_done.title}}</strike></td>
+            <td>
+                <input type="checkbox" name="{{task_done.id}}" value="unchecked" checked>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+</body>
+</html>
