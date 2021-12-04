@@ -15,7 +15,7 @@
         </tr>
         {% for task_undone in tasks_undone %}
         <tr>
-            <td>{{task_undone.title}}</td>
+            <td><a href="display_task/{{task_undone.id}}">{{task_undone.title}}</a></td>
             <td>
                 <form action="update_task/{{task_undone.id}}" method="POST">
                 <input onchange="this.form.submit()" type="checkbox" name="{{task_undone.id}}" value="checked">
@@ -26,7 +26,7 @@
 
         {% for task_done in tasks_done %}
         <tr>
-            <td><strike>{{task_done.title}}</strike></td>
+            <td><strike><a href="display_task/{{task_done.id}}">{{task_done.title}}</a></strike></td>
             <td>
                <form action="update_task/{{task_done.id}}" method="POST">
                 <input onchange="this.form.submit()" type="checkbox" name="{{task_done.id}}" value="unchecked" checked>

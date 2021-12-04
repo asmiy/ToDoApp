@@ -27,6 +27,7 @@ def index():
     return render_template("index.html", tasks_done=tasks_done,
                            tasks_undone=tasks_undone)
 
+
 @app.route('/update_task/<int:id>', methods=['POST'])
 def update_task(id):
     task = Task.query.get(id)
@@ -34,6 +35,14 @@ def update_task(id):
     task.last_update = datetime.now()
     db.session.commit()
     return redirect(url_for('index'))
+
+
+@app.route('/display_task/<int:id>', methods=['GET', 'POST'])
+def display_task(id):
+    task_to_display = Task.query.get(id)
+    if not task_to_display:
+        return "<h2>Task not found !</h2>"
+    return render_template("display_task.html", task=task_to_display)
 
 
 def prepopulate_db(db):

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ToDo Application</title>
+</head>
+<body>
+ <p><h3> Task detail </h3> </p>
+    <hr/>
+    <table>
+        <tr>
+            <td><th>Task name </th></td>
+            <td>{{task.title}}<td>
+        </tr>
+        <tr>
+            <td><th>State </th></td>
+            <td>{{"Done" if task.state==True else "Undone"}}</th></td>
+        </tr>
+
+        <tr>
+            <td><th>Description </th> </td>
+            <td>{{"" if task.description==None else task.description}}</td>
+
+        </tr>
+    </table>
+</body>
+</html>
