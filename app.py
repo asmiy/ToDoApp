@@ -1,5 +1,5 @@
 
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -43,6 +43,20 @@ def display_task(id):
     if not task_to_display:
         return "<h2>Task not found !</h2>"
     return render_template("display_task.html", task=task_to_display)
+
+
+@app.route('/add_task', methods=['POST'])
+def add_task():
+    task_title = request.form['title']
+    task_description = request.form['description']
+    new_task = Task(title=task_title, description=task_description,
+                    state=False, last_update=datetime.now())
+    try:
+        db.session.add(new_task)
+        db.session.commit()
+        return redirect(url_for('index'))
+    except:
+        return "Error while adding the new task!"
 
 
 def prepopulate_db(db):
