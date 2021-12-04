@@ -1,5 +1,5 @@
 
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -26,6 +26,14 @@ def index():
 
     return render_template("index.html", tasks_done=tasks_done,
                            tasks_undone=tasks_undone)
+
+@app.route('/update_task/<int:id>', methods=['POST'])
+def update_task(id):
+    task = Task.query.get(id)
+    task.state = True if task.state==False else False
+    task.last_update = datetime.now()
+    db.session.commit()
+    return redirect(url_for('index'))
 
 
 def prepopulate_db(db):

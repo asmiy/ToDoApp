@@ -17,7 +17,9 @@
         <tr>
             <td>{{task_undone.title}}</td>
             <td>
-                <input  type="checkbox" name="{{task_undone.id}}" value="checked">
+                <form action="update_task/{{task_undone.id}}" method="POST">
+                <input onchange="this.form.submit()" type="checkbox" name="{{task_undone.id}}" value="checked">
+              </form>
             </td>
         </tr>
         {% endfor %}
@@ -26,7 +28,9 @@
         <tr>
             <td><strike>{{task_done.title}}</strike></td>
             <td>
-                <input type="checkbox" name="{{task_done.id}}" value="unchecked" checked>
+               <form action="update_task/{{task_done.id}}" method="POST">
+                <input onchange="this.form.submit()" type="checkbox" name="{{task_done.id}}" value="unchecked" checked>
+             </form>
             </td>
         </tr>
         {% endfor %}
