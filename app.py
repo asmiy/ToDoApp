@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, redirect, url_for, request
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
@@ -14,6 +13,10 @@ class Task(db.Model):
     state = db.Column(db.Boolean)
     description = db.Column(db.String(400))
     last_update = db.Column(db.DateTime)
+
+    def update_state(self):
+        self.state = True if self.state==False else False
+        self.last_update = datetime.now()
 
 
 @app.route('/', methods=['POST', 'GET'])
@@ -31,8 +34,7 @@ def index():
 @app.route('/update_task/<int:id>', methods=['POST'])
 def update_task(id):
     task = Task.query.get(id)
-    task.state = True if task.state==False else False
-    task.last_update = datetime.now()
+    task.update_state()
     db.session.commit()
     return redirect(url_for('index'))
 
